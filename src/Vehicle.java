@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public abstract class Vehicle{
+public abstract class Vehicle implements Serializable {
     private int wheels;
     private String name;
 
@@ -22,9 +23,9 @@ public abstract class Vehicle{
 
     public void showInfo() {
         System.out.println("\t" + this.getClass().toString());
-        System.out.print("\tWheels count: ");
+        System.out.print("\t1: Wheels count: ");
         System.out.println(this.getWheels());
-        System.out.print("\tVehicle`s name: ");
+        System.out.print("\t2: Vehicle`s name: ");
         System.out.println(this.getName());
     }
 
@@ -66,8 +67,21 @@ public abstract class Vehicle{
 //        sc.close();
     }
 
+    public void edit(int index) {
+        switch (index) {
+            case 1 -> {
+                inputWheels();
+            }
+            case 2 -> {
+                inputName();
+            }
+        }
+    }
+
     public Vehicle() {
         inputWheels();
         inputName();
     }
+
+    public abstract void edit();
 }

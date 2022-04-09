@@ -46,7 +46,41 @@ public class Bus extends Vehicle{
     @Override
     public void showInfo() {
         super.showInfo();
-        System.out.print("\tSeats amount is: ");
+        System.out.print("\t3: Seats amount is: ");
         System.out.println(getSeats());
+    }
+
+    public void edit() {
+        Scanner sc = new Scanner(System.in);
+        boolean isIncorrect = false;
+        int amount = 0;
+        do {
+            System.out.println("Enter the spec you want to edit");
+            System.out.print("Input: ");
+            isIncorrect = false;
+            try {
+                amount = Integer.parseInt(sc.nextLine());
+            } catch (Exception e) {
+                isIncorrect = true;
+                System.out.println("Incorrect input");
+            }
+            int specs = 3;
+            if ((amount < 1) || (amount > specs)) {
+                isIncorrect = true;
+                System.out.println("Incorrect input, choose the number" +
+                        "between 1 and " + specs);
+            }
+        } while (isIncorrect);
+        switch (amount) {
+            case 1 -> {
+                super.edit(1);
+            }
+            case 2 -> {
+                super.edit(2);
+            }
+            case 3 -> {
+                inputSeats();
+            }
+        }
     }
 }

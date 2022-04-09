@@ -42,7 +42,41 @@ public class Tank extends Vehicle{
 
     @Override
     public void showInfo() {
-        System.out.print("\tTank`s armor thickness is: ");
+        System.out.print("\t3: Tank`s armor thickness is: ");
         System.out.println(getArmor());
+    }
+
+    public void edit() {
+        Scanner sc = new Scanner(System.in);
+        boolean isIncorrect = false;
+        int amount = 0;
+        int specs = 3;
+        do {
+            System.out.println("Enter the spec you want to edit");
+            System.out.print("Input: ");
+            isIncorrect = false;
+            try {
+                amount = Integer.parseInt(sc.nextLine());
+            } catch (Exception e) {
+                isIncorrect = true;
+                System.out.println("Incorrect input");
+            }
+            if ((amount < 1) || (amount > specs)) {
+                isIncorrect = true;
+                System.out.println("Incorrect input, choose the number" +
+                        "between 1 and " + specs);
+            }
+        } while (isIncorrect);
+        switch (amount) {
+            case 1 -> {
+                super.edit(1);
+            }
+            case 2 -> {
+                super.edit(2);
+            }
+            case 3 -> {
+                inputArmor();
+            }
+        }
     }
 }
