@@ -21,18 +21,20 @@ public abstract class Vehicle{
     }
 
     public void showInfo() {
-        System.out.println("Wheels count:");
-        System.out.println("\t" + this.getWheels());
-        System.out.println("Vehicle`s name:");
-        System.out.println("\t" + this.getName());
+        System.out.println("\t" + this.getClass().toString());
+        System.out.print("\tWheels count: ");
+        System.out.println(this.getWheels());
+        System.out.print("\tVehicle`s name: ");
+        System.out.println(this.getName());
     }
 
     private void inputWheels() {
         Scanner sc = new Scanner(System.in);
         boolean isIncorrect = false;
         int amount = 0;
-        while (isIncorrect) {
-            System.out.println("Enter the the wheels amount");
+        do {
+            System.out.println("Enter the wheels amount");
+            System.out.print("Input: ");
             isIncorrect = false;
             try {
                 amount = Integer.parseInt(sc.nextLine());
@@ -40,17 +42,18 @@ public abstract class Vehicle{
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
-        }
+        } while (isIncorrect);
         setWheels(amount);
-        sc.close();
+//        sc.close();
     }
 
     private void inputName() {
         Scanner sc = new Scanner(System.in);
         boolean isIncorrect = false;
         String str = "";
-        while (isIncorrect) {
+        do {
             System.out.println("Enter the name of the car");
+            System.out.print("Input: ");
             isIncorrect = false;
             try {
                 str = sc.nextLine();
@@ -58,9 +61,9 @@ public abstract class Vehicle{
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
-        }
+        } while (isIncorrect);
         setName(str);
-        sc.close();
+//        sc.close();
     }
 
     public Vehicle() {

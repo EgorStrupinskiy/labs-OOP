@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Tank extends Vehicle{
     private int armor;
 
@@ -8,18 +10,39 @@ public class Tank extends Vehicle{
         this.armor = armor;
     }
 
-    private void shoot() {
-        System.out.println("BANG!");
-    }
-
     @Override
     public void drive() {
         System.out.println("Tank is driving");
     }
 
+    private void inputArmor() {
+        Scanner sc = new Scanner(System.in);
+        boolean isIncorrect = true;
+        int amount = 0;
+        while (isIncorrect) {
+            System.out.println("Enter the the tank`s armor");
+            System.out.print("Input: ");
+
+            isIncorrect = false;
+            try {
+                amount = Integer.parseInt(sc.nextLine());
+            } catch (Exception e) {
+                isIncorrect = true;
+                System.out.println("Incorrect input");
+            }
+        }
+        setArmor(amount);
+//        sc.close();
+    }
+
+    public Tank() {
+        super();
+        inputArmor();
+    }
+
     @Override
     public void showInfo() {
-        System.out.println("Tank`s armor thickness is");
-        System.out.println(armor);
+        System.out.print("\tTank`s armor thickness is: ");
+        System.out.println(getArmor());
     }
 }

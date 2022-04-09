@@ -16,19 +16,16 @@ public class Bus extends Vehicle{
         System.out.println("Bus is driving");
     }
 
-    @Override
-    public void showInfo() {
-        super.showInfo();
-        System.out.println("Seats amount is:");
-        System.out.println(getSeats());
-    }
+
 
     private void inputSeats() {
         Scanner sc = new Scanner(System.in);
-        boolean isIncorrect = false;
+        boolean isIncorrect = true;
         int amount = 0;
         while (isIncorrect) {
             System.out.println("Enter the the seats amount");
+            System.out.print("Input: ");
+
             isIncorrect = false;
             try {
                 amount = Integer.parseInt(sc.nextLine());
@@ -38,11 +35,18 @@ public class Bus extends Vehicle{
             }
         }
         setSeats(amount);
-        sc.close();
+//        sc.close();
     }
 
     public Bus() {
         super();
         inputSeats();
+    }
+
+    @Override
+    public void showInfo() {
+        super.showInfo();
+        System.out.print("\tSeats amount is: ");
+        System.out.println(getSeats());
     }
 }

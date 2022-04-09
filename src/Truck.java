@@ -27,10 +27,12 @@ public class Truck extends Vehicle{
 
     private void inputConsumption() {
         Scanner sc = new Scanner(System.in);
-        boolean isIncorrect = false;
+        boolean isIncorrect = true;
         int amount = 0;
         while (isIncorrect) {
             System.out.println("Enter the the truck`s consumption");
+            System.out.print("Input: ");
+
             isIncorrect = false;
             try {
                 amount = Integer.parseInt(sc.nextLine());
@@ -40,15 +42,17 @@ public class Truck extends Vehicle{
             }
         }
         setConsumption(amount);
-        sc.close();
+//        sc.close();
     }
 
     private void inputWeight() {
         Scanner sc = new Scanner(System.in);
-        boolean isIncorrect = false;
+        boolean isIncorrect = true;
         int amount = 0;
         while (isIncorrect) {
             System.out.println("Enter the the truck`s max weight");
+            System.out.print("Input: ");
+
             isIncorrect = false;
             try {
                 amount = Integer.parseInt(sc.nextLine());
@@ -58,7 +62,7 @@ public class Truck extends Vehicle{
             }
         }
         setWeight(amount);
-        sc.close();
+//        sc.close();
     }
 
     public Truck() {
@@ -70,9 +74,9 @@ public class Truck extends Vehicle{
     @Override
     public void showInfo() {
         super.showInfo();
-        System.out.println("The consumption is:");
+        System.out.print("\tThe consumption is: ");
         System.out.println(getConsumption());
-        System.out.println("The MAX weight is:");
+        System.out.print("\tThe MAX weight is: ");
         System.out.println(getWeight());
     }
 }
