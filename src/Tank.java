@@ -1,11 +1,16 @@
+import io.SingletonScanner;
+
 import java.util.Scanner;
 
-public class Tank extends Vehicle{
+public class Tank extends Vehicle {
+    public static Scanner input = SingletonScanner.getScanner();
+
     private int armor;
 
     public int getArmor() {
         return armor;
     }
+
     public void setArmor(int armor) {
         this.armor = armor;
     }
@@ -16,7 +21,6 @@ public class Tank extends Vehicle{
     }
 
     private void inputArmor() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = true;
         int amount = 0;
         while (isIncorrect) {
@@ -25,14 +29,14 @@ public class Tank extends Vehicle{
 
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
         }
         setArmor(amount);
-//        sc.close();
+//        input.close();
     }
 
     public Tank() {
@@ -47,7 +51,6 @@ public class Tank extends Vehicle{
     }
 
     public void edit() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = false;
         int amount = 0;
         int specs = 3;
@@ -56,7 +59,7 @@ public class Tank extends Vehicle{
             System.out.print("Input: ");
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");

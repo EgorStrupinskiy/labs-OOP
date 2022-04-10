@@ -1,6 +1,10 @@
+import io.SingletonScanner;
+
 import java.util.Scanner;
 
 public class Auto extends Vehicle {
+    public static Scanner input = SingletonScanner.getScanner();
+
     private String carcase;
 
     public String getCarcase() {
@@ -22,7 +26,6 @@ public class Auto extends Vehicle {
     }
 
     private void inputCarcase() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect;
         String str = "";
         do {
@@ -31,14 +34,14 @@ public class Auto extends Vehicle {
 
             isIncorrect = false;
             try {
-                str = sc.nextLine();
+                str = input.nextLine();
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
         } while (isIncorrect);
         setCarcase(str);
-//        sc.close();
+//        input.close();
     }
 
     @Override
@@ -49,7 +52,6 @@ public class Auto extends Vehicle {
     }
 
     public void edit() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = false;
         int amount = 0;
         do {
@@ -57,7 +59,7 @@ public class Auto extends Vehicle {
             System.out.print("Input: ");
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");

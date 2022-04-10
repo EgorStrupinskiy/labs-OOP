@@ -1,7 +1,10 @@
+import io.SingletonScanner;
+
 import java.io.Serializable;
 import java.util.Scanner;
 
 public abstract class Vehicle implements Serializable {
+    public static Scanner input = SingletonScanner.getScanner();
     private int wheels;
     private String name;
 
@@ -10,6 +13,7 @@ public abstract class Vehicle implements Serializable {
     public int getWheels() {
         return wheels;
     }
+
     public void setWheels(int value) {
         this.wheels = value;
     }
@@ -17,6 +21,7 @@ public abstract class Vehicle implements Serializable {
     public String getName() {
         return name;
     }
+
     public void setName(String valueStr) {
         this.name = valueStr;
     }
@@ -30,7 +35,6 @@ public abstract class Vehicle implements Serializable {
     }
 
     private void inputWheels() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = false;
         int amount = 0;
         do {
@@ -38,18 +42,16 @@ public abstract class Vehicle implements Serializable {
             System.out.print("Input: ");
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
         } while (isIncorrect);
         setWheels(amount);
-//        sc.close();
     }
 
     private void inputName() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = false;
         String str = "";
         do {
@@ -57,14 +59,13 @@ public abstract class Vehicle implements Serializable {
             System.out.print("Input: ");
             isIncorrect = false;
             try {
-                str = sc.nextLine();
+                str = input.nextLine();
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
         } while (isIncorrect);
         setName(str);
-//        sc.close();
     }
 
     public void edit(int index) {

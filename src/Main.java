@@ -1,26 +1,28 @@
+import io.SingletonScanner;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
+    public static Scanner input = SingletonScanner.getScanner();
     static List<Vehicle> cars = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Hello\n");
         start();
+        input.close();
     }
 
     public static void start() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect;
         int choice = 0;
         do {
             showStartMenuList();
             isIncorrect = false;
             try {
-                choice = Integer.parseInt(sc.nextLine());
+                choice = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
@@ -50,14 +52,13 @@ public class Main {
     }
 
     public static void menu() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect;
         int choice = 0;
         do {
             showMenuList();
             isIncorrect = false;
             try {
-                choice = Integer.parseInt(sc.nextLine());
+                choice = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
@@ -91,7 +92,6 @@ public class Main {
             }
         }
         menu();
-//        sc.close();
     }
 
     private static void showMenuList() {
@@ -119,7 +119,6 @@ public class Main {
     }
 
     private static void addCar() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = false;
         int choice = 0;
         do {
@@ -130,7 +129,7 @@ public class Main {
             System.out.println("\t4: Tank");
             System.out.print("Your input: ");
             try {
-                choice = Integer.parseInt(sc.nextLine());
+                choice = Integer.parseInt(input.nextLine());
                 isIncorrect = false;
             } catch (Exception e) {
                 isIncorrect = true;
@@ -155,22 +154,20 @@ public class Main {
                 cars.add(new Tank());
             }
         }
-//        sc.close();
     }
 
     public static void deleteCar() {
         if (cars.size() == 0) {
             return;
         }
-        Scanner sc = new Scanner(System.in);
-        boolean isIncorrect = false;
+        boolean isIncorrect;
         int amount = 0;
         do {
             System.out.println("Enter the car`s number");
             System.out.print("Input: ");
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
@@ -182,11 +179,10 @@ public class Main {
             }
         } while (isIncorrect);
         cars.remove(amount - 1);
-//        sc.close();
+//        input.close();
     }
 
     public static void carsEdit() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = false;
         int amount = 0;
         do {
@@ -194,7 +190,7 @@ public class Main {
             System.out.print("Input: ");
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
@@ -209,7 +205,6 @@ public class Main {
     }
 
     public static String getFileName() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect;
         String str = "";
         do {
@@ -218,7 +213,7 @@ public class Main {
 
             isIncorrect = false;
             try {
-                str = sc.nextLine();
+                str = input.nextLine();
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");

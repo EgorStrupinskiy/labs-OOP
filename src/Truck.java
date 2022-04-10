@@ -1,6 +1,9 @@
+import io.SingletonScanner;
+
 import java.util.Scanner;
 
-public class Truck extends Vehicle{
+public class Truck extends Vehicle {
+    public static Scanner input = SingletonScanner.getScanner();
     private int weight;
     private int consumption;
 
@@ -26,7 +29,6 @@ public class Truck extends Vehicle{
     }
 
     private void inputConsumption() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = true;
         int amount = 0;
         while (isIncorrect) {
@@ -35,18 +37,17 @@ public class Truck extends Vehicle{
 
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
         }
         setConsumption(amount);
-//        sc.close();
+//        input.close();
     }
 
     private void inputWeight() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = true;
         int amount = 0;
         while (isIncorrect) {
@@ -55,14 +56,14 @@ public class Truck extends Vehicle{
 
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
         }
         setWeight(amount);
-//        sc.close();
+//        input.close();
     }
 
     public Truck() {
@@ -82,7 +83,6 @@ public class Truck extends Vehicle{
 
     @Override
     public void edit() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = false;
         int amount = 0;
         do {
@@ -90,7 +90,7 @@ public class Truck extends Vehicle{
             System.out.print("Input: ");
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");

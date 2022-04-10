@@ -1,6 +1,9 @@
+import io.SingletonScanner;
+
 import java.util.Scanner;
 
-public class Bus extends Vehicle{
+public class Bus extends Vehicle {
+    public static Scanner input = SingletonScanner.getScanner();
     private int seats;
 
     public int getSeats() {
@@ -17,9 +20,7 @@ public class Bus extends Vehicle{
     }
 
 
-
     private void inputSeats() {
-        Scanner sc = new Scanner(System.in);
         boolean isIncorrect = true;
         int amount = 0;
         while (isIncorrect) {
@@ -28,14 +29,14 @@ public class Bus extends Vehicle{
 
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
         }
         setSeats(amount);
-//        sc.close();
+//        input.close();
     }
 
     public Bus() {
@@ -51,15 +52,14 @@ public class Bus extends Vehicle{
     }
 
     public void edit() {
-        Scanner sc = new Scanner(System.in);
-        boolean isIncorrect = false;
+        boolean isIncorrect;
         int amount = 0;
         do {
             System.out.println("Enter the spec you want to edit");
             System.out.print("Input: ");
             isIncorrect = false;
             try {
-                amount = Integer.parseInt(sc.nextLine());
+                amount = Integer.parseInt(input.nextLine());
             } catch (Exception e) {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
