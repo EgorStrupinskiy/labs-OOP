@@ -1,3 +1,5 @@
+package vehicles;
+
 import io.SingletonScanner;
 
 import java.util.Scanner;
@@ -24,7 +26,7 @@ public class Tank extends Vehicle {
         boolean isIncorrect = true;
         int amount = 0;
         while (isIncorrect) {
-            System.out.println("Enter the the tank`s armor");
+            System.out.println("Enter the the tank`s armor thickness");
             System.out.print("Input: ");
 
             isIncorrect = false;
@@ -46,6 +48,7 @@ public class Tank extends Vehicle {
 
     @Override
     public void showInfo() {
+        super.showInfo();
         System.out.print("\t3: Tank`s armor thickness is: ");
         System.out.println(getArmor());
     }

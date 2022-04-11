@@ -1,3 +1,4 @@
+import vehicles.*;
 import io.SingletonScanner;
 
 import java.io.*;
@@ -123,10 +124,10 @@ public class Main {
         int choice = 0;
         do {
             System.out.println("Enter the vehicle type: ");
-            System.out.println("\t1: Auto");
-            System.out.println("\t2: Bus");
-            System.out.println("\t3: Truck");
-            System.out.println("\t4: Tank");
+            System.out.println("\t1: Vehicles.Auto");
+            System.out.println("\t2: Vehicles.Bus");
+            System.out.println("\t3: Vehicles.Truck");
+            System.out.println("\t4: Vehicles.Tank");
             System.out.print("Your input: ");
             try {
                 choice = Integer.parseInt(input.nextLine());
@@ -234,10 +235,8 @@ public class Main {
             var objOutputStream = new ObjectOutputStream(fileOutputStream);
 
             objOutputStream.writeObject(cars);
-            //we don't want a memory leak if we can avoid it
             fileOutputStream.close();
             objOutputStream.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -249,7 +248,9 @@ public class Main {
             var objectInputStream = new ObjectInputStream(fileInputStream);
 
             cars = (List<Vehicle>) objectInputStream.readObject();
-
+            for (Vehicle car :cars) {
+                car.drive();
+            }
             objectInputStream.close();
             fileInputStream.close();
 

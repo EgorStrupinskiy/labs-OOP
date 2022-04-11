@@ -1,3 +1,5 @@
+package vehicles;
+
 import io.SingletonScanner;
 
 import java.util.Scanner;
@@ -17,7 +19,7 @@ public class Auto extends Vehicle {
 
     @Override
     public void drive() {
-        System.out.println("Auto is driving");
+        System.out.println("Vehicles.Auto is driving");
     }
 
     public Auto() {

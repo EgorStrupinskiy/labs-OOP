@@ -1,3 +1,5 @@
+package vehicles;
+
 import io.SingletonScanner;
 
 import java.io.Serializable;

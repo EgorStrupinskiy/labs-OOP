@@ -1,38 +1,32 @@
+package vehicles;
+
 import io.SingletonScanner;
 
 import java.util.Scanner;
 
-public class Truck extends Vehicle {
+public class Bus extends Vehicle {
     public static Scanner input = SingletonScanner.getScanner();
-    private int weight;
-    private int consumption;
+    private int seats;
 
-    public int getConsumption() {
-        return consumption;
+    public int getSeats() {
+        return seats;
     }
 
-    public void setConsumption(int consumption) {
-        this.consumption = consumption;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public int getWeight() {
-        return weight;
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 
     @Override
     public void drive() {
-        System.out.println("Truck is driving");
+        System.out.println("Bus is driving");
     }
 
-    private void inputConsumption() {
+
+    private void inputSeats() {
         boolean isIncorrect = true;
         int amount = 0;
         while (isIncorrect) {
-            System.out.println("Enter the the truck`s consumption");
+            System.out.println("Enter the the seats amount");
             System.out.print("Input: ");
 
             isIncorrect = false;
@@ -43,47 +37,24 @@ public class Truck extends Vehicle {
                 System.out.println("Incorrect input");
             }
         }
-        setConsumption(amount);
+        setSeats(amount);
 //        input.close();
     }
 
-    private void inputWeight() {
-        boolean isIncorrect = true;
-        int amount = 0;
-        while (isIncorrect) {
-            System.out.println("Enter the the truck`s max weight");
-            System.out.print("Input: ");
-
-            isIncorrect = false;
-            try {
-                amount = Integer.parseInt(input.nextLine());
-            } catch (Exception e) {
-                isIncorrect = true;
-                System.out.println("Incorrect input");
-            }
-        }
-        setWeight(amount);
-//        input.close();
-    }
-
-    public Truck() {
+    public Bus() {
         super();
-        inputConsumption();
-        inputWeight();
+        inputSeats();
     }
 
     @Override
     public void showInfo() {
         super.showInfo();
-        System.out.print("\t3: The consumption is: ");
-        System.out.println(getConsumption());
-        System.out.print("\t3: The MAX weight is: ");
-        System.out.println(getWeight());
+        System.out.print("\t3: Seats amount is: ");
+        System.out.println(getSeats());
     }
 
-    @Override
     public void edit() {
-        boolean isIncorrect = false;
+        boolean isIncorrect;
         int amount = 0;
         do {
             System.out.println("Enter the spec you want to edit");
@@ -95,7 +66,7 @@ public class Truck extends Vehicle {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
-            int specs = 4;
+            int specs = 3;
             if ((amount < 1) || (amount > specs)) {
                 isIncorrect = true;
                 System.out.println("Incorrect input, choose the number" +
@@ -110,10 +81,7 @@ public class Truck extends Vehicle {
                 super.edit(2);
             }
             case 3 -> {
-                inputConsumption();
-            }
-            case 4 -> {
-                inputWeight();
+                inputSeats();
             }
         }
     }
