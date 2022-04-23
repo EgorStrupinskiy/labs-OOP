@@ -1,3 +1,5 @@
+import by.egorstrupinski.serializer.BinaryDeserializer;
+import by.egorstrupinski.serializer.BinarySerializer;
 import vehicles.*;
 import io.SingletonScanner;
 
@@ -5,6 +7,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
 
 public class Main {
     public static Scanner input = SingletonScanner.getScanner();
@@ -231,32 +236,19 @@ public class Main {
 
     public static void saveFile() {
         try {
-            var fileOutputStream = new FileOutputStream(getFileName());
-            var objOutputStream = new ObjectOutputStream(fileOutputStream);
-
-            objOutputStream.writeObject(cars);
-            fileOutputStream.close();
-            objOutputStream.close();
+            BinarySerializer binarySerializer = new BinarySerializer(getFileName());
+            binarySerializer.serialize(cars);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Cars list serialization failed");
         }
     }
 
     public static void loadFromFile() {
         try {
-            var fileInputStream = new FileInputStream(getFileName());
-            var objectInputStream = new ObjectInputStream(fileInputStream);
-
-            cars = (List<Vehicle>) objectInputStream.readObject();
-            for (Vehicle car :cars) {
-                car.drive();
-            }
-            objectInputStream.close();
-            fileInputStream.close();
-
+            BinaryDeserializer binaryDeserializer = new BinaryDeserializer(getFileName());
+            cars = (List<Vehicle>)binaryDeserializer.deserialize();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Cars list deserialization failed");
         }
     }
-
 }
