@@ -1,3 +1,4 @@
+import by.egorstrupinski.bsuir.CryptService;
 import by.egorstrupinski.serializer.BinaryDeserializer;
 import by.egorstrupinski.serializer.BinarySerializer;
 import vehicles.*;
@@ -234,10 +235,37 @@ public class Main {
         return (str);
     }
 
+
+    private static String getSecretKey() {
+        boolean isIncorrect;
+        String str = "";
+        do {
+            System.out.println("Enter the secret key to decrypt data \n");
+            System.out.print("Input: ");
+
+            isIncorrect = false;
+            try {
+                str = input.nextLine();
+            } catch (Exception e) {
+                isIncorrect = true;
+                System.out.println("Incorrect input");
+            }
+            if (!isIncorrect && str.length() == 0) {
+                System.out.println("Enter the key!!!!!!");
+                isIncorrect = true;
+            }
+        } while (isIncorrect);
+        return str;
+    }
+
     public static void saveFile() {
         try {
-            BinarySerializer binarySerializer = new BinarySerializer(getFileName());
-            binarySerializer.serialize(cars);
+            BinarySerializer binarySerializer = new BinarySerializer();
+            byte[] data = binarySerializer.serialize(cars);
+            CryptService crService = new CryptService();
+            byte[] cryptedData = crService.encrypt(data);
+            FileOutputStream fileOutputStream = new FileOutputStream(getFileName());
+            fileOutputStream.write(cryptedData);
         } catch (IOException e) {
             System.out.println("Cars list serialization failed");
         }
@@ -245,8 +273,12 @@ public class Main {
 
     public static void loadFromFile() {
         try {
-            BinaryDeserializer binaryDeserializer = new BinaryDeserializer(getFileName());
-            cars = (List<Vehicle>)binaryDeserializer.deserialize();
+            FileInputStream fileInputStream = new FileInputStream(getFileName());
+            byte[] encryptedData = fileInputStream.readAllBytes();
+            CryptService crService = new CryptService();
+            byte[] decryptedData = crService.decrypt(encryptedData, getSecretKey());
+            BinaryDeserializer binaryDeserializer = new BinaryDeserializer();
+            cars = (List<Vehicle>)binaryDeserializer.deserialize(decryptedData);
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Cars list deserialization failed");
         }
