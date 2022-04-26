@@ -8,9 +8,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-
-import static java.util.Arrays.stream;
 
 public class Main {
     public static Scanner input = SingletonScanner.getScanner();
@@ -167,6 +164,10 @@ public class Main {
         if (cars.size() == 0) {
             return;
         }
+        cars.remove(getCarNuber() - 1);
+    }
+
+    public static int getCarNuber() {
         boolean isIncorrect;
         int amount = 0;
         do {
@@ -185,30 +186,11 @@ public class Main {
                         "between 1 and " + cars.size());
             }
         } while (isIncorrect);
-        cars.remove(amount - 1);
-//        input.close();
+        return amount;
     }
 
     public static void carsEdit() {
-        boolean isIncorrect = false;
-        int amount = 0;
-        do {
-            System.out.println("Enter the car`s number");
-            System.out.print("Input: ");
-            isIncorrect = false;
-            try {
-                amount = Integer.parseInt(input.nextLine());
-            } catch (Exception e) {
-                isIncorrect = true;
-                System.out.println("Incorrect input");
-            }
-            if ((amount < 1) || (amount > cars.size())) {
-                isIncorrect = true;
-                System.out.println("Incorrect input, choose the number" +
-                        "between 1 and " + cars.size());
-            }
-        } while (isIncorrect);
-        cars.get(amount - 1).edit();
+        cars.get(getCarNuber() - 1).edit();
     }
 
     public static String getFileName() {
@@ -235,37 +217,14 @@ public class Main {
         return (str);
     }
 
-
-    private static String getSecretKey() {
-        boolean isIncorrect;
-        String str = "";
-        do {
-            System.out.println("Enter the secret key to decrypt data \n");
-            System.out.print("Input: ");
-
-            isIncorrect = false;
-            try {
-                str = input.nextLine();
-            } catch (Exception e) {
-                isIncorrect = true;
-                System.out.println("Incorrect input");
-            }
-            if (!isIncorrect && str.length() == 0) {
-                System.out.println("Enter the key!!!!!!");
-                isIncorrect = true;
-            }
-        } while (isIncorrect);
-        return str;
-    }
-
     public static void saveFile() {
         try {
             BinarySerializer binarySerializer = new BinarySerializer();
             byte[] data = binarySerializer.serialize(cars);
             CryptService crService = new CryptService();
-            byte[] cryptedData = crService.encrypt(data);
+            byte[] encryptedData = crService.encrypt(data);
             FileOutputStream fileOutputStream = new FileOutputStream(getFileName());
-            fileOutputStream.write(cryptedData);
+            fileOutputStream.write(encryptedData);
         } catch (IOException e) {
             System.out.println("Cars list serialization failed");
         }
@@ -276,7 +235,7 @@ public class Main {
             FileInputStream fileInputStream = new FileInputStream(getFileName());
             byte[] encryptedData = fileInputStream.readAllBytes();
             CryptService crService = new CryptService();
-            byte[] decryptedData = crService.decrypt(encryptedData, getSecretKey());
+            byte[] decryptedData = crService.decrypt(encryptedData);
             BinaryDeserializer binaryDeserializer = new BinaryDeserializer();
             cars = (List<Vehicle>)binaryDeserializer.deserialize(decryptedData);
         } catch (IOException | ClassNotFoundException e) {
