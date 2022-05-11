@@ -1,3 +1,4 @@
+import adapter.XmlSerializerAdapter;
 import by.egorstrupinski.bsuir.CryptService;
 import by.egorstrupinski.serializer.BinaryDeserializer;
 import by.egorstrupinski.serializer.BinarySerializer;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static Scanner input = SingletonScanner.getScanner();
+    public static Scanner input = new SingletonScanner().getScanner();
     static List<Vehicle> cars = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -67,7 +68,7 @@ public class Main {
                 isIncorrect = true;
                 System.out.println("Incorrect input");
             }
-            if (!isIncorrect && ((choice < 0) || (choice > 6))) {
+            if (!isIncorrect && ((choice < 0) || (choice > 7))) {
                 System.out.println("There is no such points");
                 isIncorrect = true;
             }
@@ -92,6 +93,9 @@ public class Main {
                 saveFile();
             }
             case 6 -> {
+                printXML();
+            }
+            case 7 -> {
                 return;
             }
         }
@@ -105,7 +109,9 @@ public class Main {
         System.out.println("\t3.Show vehicle`s list");
         System.out.println("\t4.Edit vehicle");
         System.out.println("\t5.Save to file");
-        System.out.println("\t6.Exit");
+        System.out.println("\t6:PrintXML");
+        System.out.println("\t7:Exit");
+
         System.out.print("Your input: ");
     }
 
@@ -131,6 +137,7 @@ public class Main {
             System.out.println("\t2: Vehicles.Bus");
             System.out.println("\t3: Vehicles.Truck");
             System.out.println("\t4: Vehicles.Tank");
+
             System.out.print("Your input: ");
             try {
                 choice = Integer.parseInt(input.nextLine());
@@ -155,7 +162,8 @@ public class Main {
                 cars.add(new Truck());
             }
             case 4 -> {
-                cars.add(new Tank());
+//                cars.add(new Tank());
+                cars.add(Tank.getTank());
             }
         }
     }
@@ -215,6 +223,14 @@ public class Main {
             }
         } while (isIncorrect);
         return (str);
+    }
+
+    public static void printXML(){
+        XmlSerializerAdapter xmlSerializerAdapter = new XmlSerializerAdapter();
+        for (Vehicle car : cars
+        ) {
+            System.out.println(xmlSerializerAdapter.toXml(car));
+        }
     }
 
     public static void saveFile() {

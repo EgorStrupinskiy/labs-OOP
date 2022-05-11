@@ -5,7 +5,7 @@ import io.SingletonScanner;
 import java.util.Scanner;
 
 public class Truck extends Vehicle {
-    public static Scanner input = SingletonScanner.getScanner();
+    public static Scanner input = new SingletonScanner().getScanner();
     private int weight;
     private int consumption;
 

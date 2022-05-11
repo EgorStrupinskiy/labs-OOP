@@ -5,7 +5,7 @@ import io.SingletonScanner;
 import java.util.Scanner;
 
 public class Auto extends Vehicle {
-    public static Scanner input = SingletonScanner.getScanner();
+    public static Scanner input = new SingletonScanner().getScanner();
 
     private String carcase;
 

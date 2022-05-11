@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public abstract class Vehicle implements Serializable {
-    public static Scanner input = SingletonScanner.getScanner();
+    public static Scanner input = new SingletonScanner().getScanner();
     private int wheels;
     private String name;
 
@@ -84,6 +84,11 @@ public abstract class Vehicle implements Serializable {
     public Vehicle() {
         inputWheels();
         inputName();
+    }
+
+    public Vehicle(int wheels, String name) {
+        this.wheels = wheels;
+        this.name = name;
     }
 
     public abstract void edit();
