@@ -6,6 +6,7 @@ public class SingletonScanner {
     private static Scanner inputSc;
 
     public SingletonScanner() {
+
     }
 
     public Scanner getScanner() {
